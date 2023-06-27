@@ -1,0 +1,50 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "发现"
+      }
+    },
+    {
+      "path": "pages/collection/collection",
+      "style": {
+        "navigationBarTitleText": "收藏"
+      }
+    },
+    {
+      "path": "pages/about/about",
+      "style": {
+        "navigationBarTitleText": "关于"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "发现",
+        "iconPath": "./static/images/tabbar/radar.png",
+        "selectedIconPath": "./static/images/tabbar/radar.png"
+      },
+      {
+        "pagePath": "pages/collection/collection",
+        "text": "收藏",
+        "iconPath": "./static/images/tabbar/star.png",
+        "selectedIconPath": "./static/images/tabbar/star.png"
+      },
+      {
+        "pagePath": "pages/about/about",
+        "text": "关于",
+        "iconPath": "./static/images/tabbar/note.png",
+        "selectedIconPath": "./static/images/tabbar/note.png"
+      }
+    ]
+  }
+}
