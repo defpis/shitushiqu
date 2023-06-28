@@ -4,9 +4,9 @@
 			<text>选择你想去旅行的地区</text>
 
 			<view class="region-list">
-				<view v-for="region of regions">
-					<text>{{ region.regionName }}</text>
-					<image :src="region.coverImgUrl"></image>
+				<view v-for="item of regions">
+					<text>{{ item.regionName }}</text>
+					<image :src="item.coverImgUrl"></image>
 				</view>
 			</view>
 		</view>
@@ -24,21 +24,32 @@
 				<image src="../../static/images/illustration/work-hard.png"></image>
 			</view>
 
-			<view id="form-popup" v-if="showForm">
-				<mp-form>
-					<mp-cell title="姓名" prop="userName">
-						<input placeholder="请输入姓名" />
-					</mp-cell>
-				</mp-form>
+			<view>
+				<button @click="open" type="primary" class="btn-bottom">告诉我们你想去的地区</button>
+				<uni-popup ref="popup" type="bottom" background-color="#fff">
+					<view class="form">
+						<uni-forms label-position="top">
+							<uni-forms-item label="推荐景点">
+								<uni-easyinput type="text" />
+							</uni-forms-item>
+							<uni-forms-item label="推荐理由">
+								<uni-easyinput type="textarea" />
+							</uni-forms-item>
+							<view class="action">
+								<button type="primary">提交</button>
+								<button @click="close">取消</button>
+							</view>
+						</uni-forms>
+					</view>
+				</uni-popup>
 			</view>
-
-			<button type="primary" class="btn-bottom" @tap="toggleForm">告诉我们你想去的地区</button>
 		</view>
 
 	</view>
 </template>
 
-<script lang="ts">
+<script>
+
 import Vue from 'vue';
 
 export default Vue.extend({
@@ -58,103 +69,109 @@ export default Vue.extend({
 					coverImgUrl: '../../static/images/cover/example.jpg'
 				}
 			],
-			showForm: false
 		}
 	},
 	methods: {
-		toggleForm() {
-			this.showForm = !this.showForm;
+		open() {
+			this.$refs.popup.open('bottom')
+		},
+		close() {
+			this.$refs.popup.close('bottom')
 		}
 	}
 });
 </script>
 
-<style>
-.region-list>view {
-	margin-block-start: 20px;
-	height: 240px;
-	position: relative;
-	overflow: hidden;
-}
+<style lang="scss">
+.region-list {
+	>view {
+		margin-block-start: 20px;
+		height: 240px;
+		position: relative;
+		overflow: hidden;
 
-.region-list>view:last-child {
-	margin-block-end: 40px;
-}
-
-.region-list image {
-	width: 100%;
-	border-radius: 12px;
-}
-
-.region-list text {
-	font-weight: 900;
-	font-size: 64px;
-	color: white;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-}
-
-.region-submit .btn-top {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	background-color: white;
-	border: 0.5px solid #dedede;
-	font-weight: 400;
-	font-size: 16px;
-	width: 160px;
-	margin-block-start: 40px;
-}
-
-.region-submit .btn-top>image {
-	width: 20px;
-	height: 20px;
-	margin-inline-end: 4px;
-}
-
-.region-submit .tips {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	margin-block-start: 40px;
-}
-
-.region-submit .tips>text {
-	margin: 8px 0;
-	color: #666;
-	font-size: 16px;
-}
-
-.region-submit .tips>image {
-	width: 100%;
-	margin-block-start: 20px;
-}
-
-.region-submit .btn-bottom {
-	margin-block-start: 40px;
-	margin-block-end: 40px;
-}
-
-#form-popup {
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	background: #fff;
-	z-index: 99;
-	animation: showPopup 0.3s linear;
-}
-
-@keyframes showPopup {
-	from {
-		transform: translateY(100%);
+		&:last-child {
+			margin-block-end: 40px;
+		}
 	}
 
-	to {
-		transform: translateY(0);
+	text {
+		font-weight: 900;
+		font-size: 64px;
+		color: white;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	image {
+		width: 100%;
+		border-radius: 12px;
+	}
+}
+
+.region-submit {
+	.btn-top {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		background-color: white;
+		border: 0.5px solid #dedede;
+		font-weight: 400;
+		font-size: 16px;
+		width: 160px;
+		margin-block-start: 40px;
+		border-radius: 32px;
+
+		>image {
+			width: 20px;
+			height: 20px;
+			margin-inline-end: 4px;
+		}
+	}
+
+	.tips {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-block-start: 40px;
+
+		>text {
+			margin: 8px 0;
+			color: #666;
+			font-size: 16px;
+		}
+
+		>image {
+			width: 100%;
+			margin-block-start: 20px;
+		}
+	}
+
+	.btn-bottom {
+		margin-block-start: 40px;
+		margin-block-end: 40px;
+	}
+
+	.form {
+		padding: 20px;
+
+		.action {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+
+			>button {
+				flex: 1;
+				margin-inline-start: 20px;
+
+				&:first-child {
+					margin-inline-start: 0;
+				}
+			}
+		}
 	}
 }
 </style>

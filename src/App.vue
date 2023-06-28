@@ -4,6 +4,9 @@ export default Vue.extend({
     mpType: 'app',
     onLaunch() {
         console.log('App Launch')
+        uni.switchTab({
+            url: '/pages/collection/collection'
+        });
     },
     onShow() {
         console.log('App Show')
@@ -14,7 +17,7 @@ export default Vue.extend({
 });
 </script>
 
-<style>
+<style lang="scss">
 page {
     height: 100%;
 }
@@ -25,5 +28,8 @@ page {
     height: 100%;
     padding: 20px;
     box-sizing: border-box;
+    background-color: #F9F9F9;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 </style>

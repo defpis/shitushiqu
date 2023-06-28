@@ -21,7 +21,7 @@
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
+    "navigationBarTitleText": "时途拾趣",
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
@@ -29,22 +29,28 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "发现",
+        // "text": "发现",
         "iconPath": "./static/images/tabbar/radar.png",
-        "selectedIconPath": "./static/images/tabbar/radar.png"
+        "selectedIconPath": "./static/images/tabbar/radar-2.png"
       },
       {
         "pagePath": "pages/collection/collection",
-        "text": "收藏",
+        // "text": "收藏",
         "iconPath": "./static/images/tabbar/star.png",
-        "selectedIconPath": "./static/images/tabbar/star.png"
+        "selectedIconPath": "./static/images/tabbar/star-2.png"
       },
       {
         "pagePath": "pages/about/about",
-        "text": "关于",
+        // "text": "关于",
         "iconPath": "./static/images/tabbar/note.png",
-        "selectedIconPath": "./static/images/tabbar/note.png"
+        "selectedIconPath": "./static/images/tabbar/note-2.png"
       }
     ]
+  },
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+    }
   }
 }
