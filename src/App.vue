@@ -5,7 +5,7 @@ export default Vue.extend({
     onLaunch() {
         console.log('App Launch')
         uni.switchTab({
-            url: '/pages/collection/collection'
+            url: '/pages/about/about'
         });
     },
     onShow() {
@@ -26,7 +26,6 @@ page {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 20px;
     box-sizing: border-box;
     background-color: #F9F9F9;
     overflow-x: hidden;

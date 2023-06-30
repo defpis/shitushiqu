@@ -1,6 +1,6 @@
 <template>
-	<view class="container">
-		<uni-swipe-action-item class="spot-wrapper" v-for="item of collections">
+	<uni-swipe-action class="container">
+		<uni-swipe-action-item class="spot-wrapper" v-for="item of collections" :key="index">
 			<view style="padding: 0 20px;">
 				<view class="spot-card">
 					<image :src="item.coverUrl"></image>
@@ -23,7 +23,7 @@
 				</view>
 			</template>
 		</uni-swipe-action-item>
-	</view>
+	</uni-swipe-action>
 </template>
 
 <script>
@@ -33,14 +33,6 @@ import { range } from 'lodash'
 export default Vue.extend({
 	data() {
 		return {
-			options: [
-				{
-					text: '取消收藏',
-					style: {
-						backgroundColor: '#FF2E00'
-					}
-				}
-			],
 			collections: [
 				...range(10).map(() => ({
 					coverUrl: '../../static/images/spot/mini-cover.png',
@@ -51,23 +43,18 @@ export default Vue.extend({
 			]
 		}
 	},
-	methods: {
-		onStart() {
-			console.log('start')
-		},
-		onMove(ev) {
-			console.log('move', ev)
-		},
-		onEnd() {
-			console.log('end')
-		}
-	}
+	methods: {}
 });
 </script>
 
 <style lang="scss">
 .container {
 	padding: 20px 0;
+
+	>view {
+		display: flex;
+		flex-direction: column;
+	}
 }
 
 .spot-wrapper {
@@ -77,10 +64,6 @@ export default Vue.extend({
 
 	&:first-child {
 		margin-block-start: 0;
-	}
-
-	&:last-child {
-		margin-block-end: 40px;
 	}
 }
 
