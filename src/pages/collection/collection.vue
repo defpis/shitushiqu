@@ -1,8 +1,7 @@
 <template>
 	<view class="container">
-
-		<view class="spot-wrapper" @touchstart="onStart" @touchend="onEnd" @touchmove="onMove" v-for="item of collections">
-			<view>
+		<uni-swipe-action-item class="spot-wrapper" v-for="item of collections">
+			<view style="padding: 0 20px;">
 				<view class="spot-card">
 					<image :src="item.coverUrl"></image>
 					<view>
@@ -16,12 +15,14 @@
 						</view>
 					</view>
 				</view>
+			</view>
 
-				<view class="spot-unstar">
+			<template v-slot:right>
+				<view class="spot-remove">
 					<text>取消收藏</text>
 				</view>
-			</view>
-		</view>
+			</template>
+		</uni-swipe-action-item>
 	</view>
 </template>
 
@@ -32,6 +33,14 @@ import { range } from 'lodash'
 export default Vue.extend({
 	data() {
 		return {
+			options: [
+				{
+					text: '取消收藏',
+					style: {
+						backgroundColor: '#FF2E00'
+					}
+				}
+			],
 			collections: [
 				...range(10).map(() => ({
 					coverUrl: '../../static/images/spot/mini-cover.png',
@@ -57,27 +66,17 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
+.container {
+	padding: 20px 0;
+}
+
 .spot-wrapper {
-	>view {
-		position: relative;
-		height: 132px;
-		display: flex;
-		flex-direction: row;
-	}
+	box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.01);
 
 	margin-block-start: 20px;
 
 	&:first-child {
 		margin-block-start: 0;
-
-		.spot-card {
-			left: -116px;
-		}
-
-		.spot-unstar {
-			right: 0;
-			display: flex;
-		}
 	}
 
 	&:last-child {
@@ -85,37 +84,21 @@ export default Vue.extend({
 	}
 }
 
-.spot-unstar {
+.spot-remove {
+	margin-inline-end: 20px;
 	border-radius: 24px;
 	background: #FF2E00;
 	box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.01);
-
-	position: absolute;
-	top: 0;
-	right: 0;
-	height: 100%;
-	display: none;
-	// display: flex;
+	display: flex;
 	align-items: center;
 	color: white;
 	padding: 18px;
-	box-sizing: border-box;
 }
 
 .spot-card {
-	position: absolute;
-	top: 0;
-	left: 0;
-
 	border-radius: 24px;
-	background: #FFF;
-	box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.01);
-	width: 100%;
-	box-sizing: border-box;
-
-	height: 100%;
+	background-color: #fff;
 	padding: 16px;
-
 	flex: 1;
 	display: flex;
 	flex-direction: row;
