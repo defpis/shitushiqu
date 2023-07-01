@@ -17,6 +17,18 @@
       "style": {
         "navigationBarTitleText": "关于"
       }
+    },
+    {
+      "path": "pages/spot/spot",
+      "style": {
+        "navigationBarTitleText": "景点"
+      }
+    },
+    {
+      "path": "pages/spot/preview",
+      "style": {
+        "navigationBarTitleText": "预览"
+      }
     }
   ],
   "globalStyle": {
@@ -29,19 +41,16 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        // "text": "发现",
         "iconPath": "./static/images/tabbar/radar.png",
         "selectedIconPath": "./static/images/tabbar/radar-2.png"
       },
       {
         "pagePath": "pages/collection/collection",
-        // "text": "收藏",
         "iconPath": "./static/images/tabbar/star.png",
         "selectedIconPath": "./static/images/tabbar/star-2.png"
       },
       {
         "pagePath": "pages/about/about",
-        // "text": "关于",
         "iconPath": "./static/images/tabbar/note.png",
         "selectedIconPath": "./static/images/tabbar/note-2.png"
       }

@@ -1,29 +1,37 @@
 <template>
-	<uni-swipe-action class="container">
-		<uni-swipe-action-item class="spot-wrapper" v-for="item of collections" :key="index">
-			<view style="padding: 0 20px;">
-				<view class="spot-card">
-					<image :src="item.coverUrl"></image>
-					<view>
-						<view class="spot-title">
-							<text>{{ item.spotName }}</text>
-							<uni-tag :text="item.regionName" :inverted="true" type="primary" />
-						</view>
-						<view class="spot-info">
-							<text>推荐旅行时间：</text>
-							<text class="time">{{ item.recommendedTime }}</text>
+	<view class="container">
+		<uni-swipe-action class="content">
+			<uni-swipe-action-item class="spot-wrapper" v-for="(item, index) in collections" :key="index">
+				<view style="padding: 0 20px;">
+					<view class="spot-card" @longtap="longtap" @tap="detail(item)">
+						<image mode='aspectFill' :src="item.coverUrl"></image>
+						<view>
+							<view class="spot-title">
+								<text>{{ item.spotName }}</text>
+								<uni-tag :text="item.regionName" :inverted="true" type="primary" />
+							</view>
+							<view class="spot-info">
+								<text>推荐旅行时间：</text>
+								<text class="time">{{ item.recommendedTime }}</text>
+							</view>
 						</view>
 					</view>
 				</view>
-			</view>
 
-			<template v-slot:right>
-				<view class="spot-remove">
-					<text>取消收藏</text>
-				</view>
-			</template>
-		</uni-swipe-action-item>
-	</uni-swipe-action>
+				<template v-slot:right>
+					<button class="spot-remove" @tap="remove(index)">取消收藏</button>
+				</template>
+			</uni-swipe-action-item>
+		</uni-swipe-action>
+
+		<uni-popup ref="popup" type="bottom" :safeArea="false" background-color="#fff">
+			<view class="action">
+				<button>分享到微信</button>
+				<button>取消收藏</button>
+				<button @tap="close">取消</button>
+			</view>
+		</uni-popup>
+	</view>
 </template>
 
 <script>
@@ -34,21 +42,50 @@ export default Vue.extend({
 	data() {
 		return {
 			collections: [
-				...range(10).map(() => ({
+				...range(10).map((i) => ({
 					coverUrl: '../../static/images/spot/mini-cover.png',
-					spotName: '景点名称',
+					spotName: '景点名称' + i,
 					regionName: '区域名称',
 					recommendedTime: '2020.01.01'
 				}))
-			]
+			],
+			timer: -1,
 		}
 	},
-	methods: {}
+	methods: {
+		detail(item) {
+			uni.navigateTo({
+				url: '/pages/spot/spot',
+			})
+		},
+		remove(index) {
+			this.collections.splice(index, 1)
+		},
+		open() {
+			this.$refs.popup.open('bottom')
+		},
+		close() {
+			this.$refs.popup.close('bottom')
+		},
+		longtap() {
+			this.open();
+		}
+	}
 });
 </script>
 
 <style lang="scss">
-.container {
+.action {
+	>button {
+		border-radius: 0;
+	}
+
+	>button::after {
+		border-radius: 0;
+	}
+}
+
+.content {
 	padding: 20px 0;
 
 	>view {
@@ -76,6 +113,7 @@ export default Vue.extend({
 	align-items: center;
 	color: white;
 	padding: 18px;
+	font-size: 14px;
 }
 
 .spot-card {

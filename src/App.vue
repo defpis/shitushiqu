@@ -1,12 +1,17 @@
 <script lang="ts">
+
 import Vue from 'vue';
+
 export default Vue.extend({
     mpType: 'app',
     onLaunch() {
         console.log('App Launch')
-        uni.switchTab({
-            url: '/pages/about/about'
-        });
+        // uni.switchTab({
+        //     url: '/pages/collection/collection'
+        // });
+        // uni.navigateTo({
+        //     url: '/pages/spot/preview',
+        // })
     },
     onShow() {
         console.log('App Show')
@@ -20,6 +25,7 @@ export default Vue.extend({
 <style lang="scss">
 page {
     height: 100%;
+    font-family: PingFang SC;
 }
 
 .container {

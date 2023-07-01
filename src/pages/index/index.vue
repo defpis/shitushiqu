@@ -1,35 +1,35 @@
 <template>
 	<view class="container">
-		<swiper class="swiper-wrapper" vertical :current="current" @change="onChange">
+		<swiper class="swiper-wrapper" vertical :current="current" @change="change">
 			<swiper-item>
 				<view class="region-select">
 					<view>
 						<text>选择你想去旅行的地区</text>
 					</view>
-					<view v-for="item of regions" class="region-item" :key="index">
+					<view v-for="(item, index) in regions" class="region-item" :key="index">
 						<text>{{ item.regionName }}</text>
-						<image :src="item.coverImgUrl"></image>
+						<image mode='aspectFill' :src="item.coverImgUrl"></image>
 					</view>
 				</view>
 			</swiper-item>
 
 			<swiper-item>
 				<view class="region-submit">
-					<button class="btn-top" @click="goBack">
-						<image src="../../static/icons/arrow-up.svg"></image>
-						返回首页
+					<button class="btn-top" @tap="goBack">
+						<image mode='aspectFill' src="../../static/icons/arrow-up.svg"></image>
+						<text>返回首页</text>
 					</button>
 
 					<view class='tips'>
 						<text>不好意思，人手有限，目前只有以上地区数据</text>
 						<text>我们正在哼哧哼哧地挑选更多好看的地区</text>
 
-						<image src="../../static/images/illustration/work-hard.png"></image>
+						<image mode='aspectFill' src="../../static/images/illustration/work-hard.png"></image>
 					</view>
 
 					<view>
-						<button @click="open" type="primary" class="btn-bottom">告诉我们你想去的地区</button>
-						<uni-popup ref="popup" type="bottom" background-color="#fff">
+						<button @tap="open" type="primary" class="btn-bottom">告诉我们你想去的地区</button>
+						<uni-popup ref="popup" type="bottom" :safeArea="false" background-color="#fff">
 							<view class="form">
 								<uni-forms label-position="top">
 									<uni-forms-item label="推荐景点">
@@ -39,7 +39,7 @@
 										<uni-easyinput type="textarea" />
 									</uni-forms-item>
 									<view class="action">
-										<button @click="close">取消</button>
+										<button @tap="close">取消</button>
 										<button type="primary">提交</button>
 									</view>
 								</uni-forms>
@@ -63,15 +63,15 @@ export default Vue.extend({
 			regions: [
 				{
 					regionName: '新疆',
-					coverImgUrl: '../../static/images/cover/example.jpg'
+					coverImgUrl: '../../static/images/spot/region.jpg'
 				},
 				{
 					regionName: '川西',
-					coverImgUrl: '../../static/images/cover/example.jpg'
+					coverImgUrl: '../../static/images/spot/region.jpg'
 				},
 				{
 					regionName: '西藏',
-					coverImgUrl: '../../static/images/cover/example.jpg'
+					coverImgUrl: '../../static/images/spot/region.jpg'
 				},
 			],
 		}
@@ -80,7 +80,7 @@ export default Vue.extend({
 		goBack() {
 			this.current = 0;
 		},
-		onChange(ev) {
+		change(ev) {
 			this.current = ev.detail.current;
 		},
 		open() {
@@ -169,6 +169,7 @@ export default Vue.extend({
 
 		>image {
 			width: 100%;
+			border-radius: 12px;
 			margin-block-start: 20px;
 		}
 	}

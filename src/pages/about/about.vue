@@ -2,7 +2,7 @@
 	<view class="container">
 		<view class="user-info">
 			<view class="user">
-				<image src="../../static/images/cover/avatar.png"></image>
+				<image mode='aspectFill' src="../../static/images/avatar/login-user.png"></image>
 				<text>AbnerTang</text>
 			</view>
 			<view class="login">
@@ -11,7 +11,7 @@
 		</view>
 
 		<view class="logo">
-			<image src="../../static/images/text/journey.png"></image>
+			<image mode='aspectFill' src="../../static/images/text/journey.png"></image>
 		</view>
 
 		<view class="tips">
@@ -21,26 +21,26 @@
 
 		<view class="action">
 			<button>
-				<image src="../../static/icons/export.svg"></image>
+				<image mode='aspectFill' src="../../static/icons/export.svg"></image>
 				<text>分享给你的朋友们</text>
 			</button>
 			<button>
-				<image style="width: 48px; height: 48px;" src="../../static/icons/drink.svg"></image>
+				<image mode='aspectFill' style="width: 48px; height: 48px;" src="../../static/icons/drink.svg"></image>
 				<text>赏一杯奶茶 (￥10)</text>
 			</button>
-			<button @click="open">
-				<image src="../../static/icons/edit.svg"></image>
+			<button @tap="open">
+				<image mode='aspectFill' src="../../static/icons/edit.svg"></image>
 				<text>给我们反馈</text>
 			</button>
 
-			<uni-popup ref="popup" type="bottom" background-color="#fff">
+			<uni-popup ref="popup" type="bottom" :safeArea="false" background-color="#fff">
 				<view class="form">
 					<uni-forms label-position="top">
 						<uni-forms-item label="反馈内容">
-							<uni-easyinput type="textarea" placeholder="输入你的内容" />
+							<uni-easyinput type="textarea" />
 						</uni-forms-item>
 						<view class="form-action">
-							<button @click="close">取消</button>
+							<button @tap="close">取消</button>
 							<button type="primary">提交</button>
 						</view>
 					</uni-forms>
